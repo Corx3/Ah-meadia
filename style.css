@@ -1,0 +1,370 @@
+:root {
+    --dark-primary: #050505;
+    --dark-surface: #0f1115;
+    --dark-card: #161920;
+    --neon-green: #00ff41;
+    --deep-green: #008f11;
+    --cyber-blue: #00d4ff;
+    --text-main: #f5f5f7;
+    --text-muted: #86868b;
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--dark-primary);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* القائمة العلوية */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition-smooth);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.logo span {
+    background: linear-gradient(135deg, var(--neon-green), var(--cyber-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    transition: var(--transition-smooth);
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:hover {
+    color: var(--neon-green);
+}
+
+/* تصميم زر الـ Hamburger المخفي افتراضياً على الحواسب */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-main);
+    border-radius: 10px;
+    transition: var(--transition-smooth);
+}
+
+/* تحويل القائمة عند تفعيل وضع الهواتف الذكية */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        background: rgba(15, 17, 21, 0.98);
+        backdrop-filter: blur(25px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* فئة برمجية تضاف بـ JS لفتح القائمة */
+    .nav-links.active {
+        right: 0;
+    }
+
+    /* تحويل الزر لشكل X عند الفتح */
+    .menu-toggle.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.is-active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+        background-color: var(--neon-green);
+    }
+    .menu-toggle.is-active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        background-color: var(--neon-green);
+    }
+}
+
+/* الواجهات والعناصر الكبرى */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #111b15 0%, var(--dark-primary) 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(5,5,5,0) 60%, var(--dark-primary) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.brand-title {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 30%, var(--neon-green) 70%, var(--cyber-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.2));
+}
+
+@media (max-width: 768px) {
+    .brand-title { font-size: 3.5rem; }
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 14px 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--neon-green), var(--deep-green));
+    color: #000;
+    box-shadow: 0 4px 20px rgba(0, 255, 65, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(0, 255, 65, 0.5);
+}
+
+.btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.btn-outline:hover {
+    background: var(--text-main);
+    color: #000;
+}
+
+/* قسم الفيديوهات والمعرض */
+.gallery-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.accent-line {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--neon-green), var(--cyber-blue));
+    margin: 15px auto 0;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+    .video-grid { grid-template-columns: 1fr; }
+}
+
+.video-card {
+    background: var(--dark-surface);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 65, 0.2);
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+}
+
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 25px;
+    text-align: right;
+}
+
+.card-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-info p {
+    color: var(--text-muted);
+}
+
+.more-videos-wrapper {
+    background: linear-gradient(135deg, var(--dark-surface), var(--dark-card));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 50px 30px;
+    border-radius: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.facebook-link-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: #1877f2;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+}
+
+.facebook-link-card:hover {
+    box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4);
+}
+
+/* قسم الواتساب */
+.contact-section {
+    padding: 100px 20px;
+}
+
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background: var(--dark-surface);
+    border-radius: 24px;
+}
+
+.whatsapp-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #25d366;
+    color: #000;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 12px;
+    font-weight: 900;
+    width: 100%;
+    transition: var(--transition-smooth);
+}
+
+.whatsapp-trigger:hover {
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+}
+
+.wa-svg {
+    width: 24px;
+    height: 24px;
+}
+
+footer {
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    color: var(--text-muted);
+}
